@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DORA Hair Salon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0f121a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: min(1140px, 95%);
+            margin: 0 auto;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 12, 20, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+            padding: 18px 0;
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav h1 {
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            color: #d4af37;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        nav a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.25s ease;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(135deg, rgba(15, 18, 26, 0.88), rgba(15, 18, 26, 0.4)), url('https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1400&q=80');
+            background-size: 100%;
+            background-position: center;
+            text-align: center;
+            padding: 0 20px;
+            animation: heroZoom 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            from {
+                background-size: 100%;
+            }
+            to {
+                background-size: 110%;
+            }
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero-content h2 {
+            font-size: clamp(2.8rem, 4vw, 4.5rem);
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #d1d1d1;
+            margin-bottom: 32px;
+        }
+
+        .hero-content .hero-btn {
+            background: #d4af37;
+            color: #111;
+            padding: 16px 38px;
+            border-radius: 999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-content .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 35px rgba(212, 175, 55, 0.25);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #d4af37;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: clamp(2.1rem, 2.8vw, 3rem);
+            margin-bottom: 16px;
+        }
+
+        .section-text {
+            max-width: 760px;
+            margin: 0 auto;
+            color: #c7c7c7;
+            text-align: center;
+        }
+
+        .services-grid,
+        .gallery-grid,
+        .testimonials-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.14);
+            border-radius: 24px;
+            padding: 28px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 22px 44px rgba(0, 0, 0, 0.22);
+        }
+
+        .service-card h3 {
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: #c7c7c7;
+            margin-bottom: 20px;
+            min-height: 72px;
+        }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        .service-card button {
+            margin-top: 22px;
+            width: 100%;
+            background: #d4af37;
+            color: #111;
+            border: none;
+            border-radius: 999px;
+            padding: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .service-card button:hover {
+            background: #f5c842;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 260px;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .gallery-item img.gallery-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-origin: center center;
+            will-change: transform;
+            animation: imgZoom 6s ease-in-out infinite alternate;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(15, 18, 26, 0.94));
+            display: flex;
+            align-items: flex-end;
+            padding: 22px;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        @keyframes imgZoom {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .booking-wrapper,
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .booking-card,
+        .contact-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+        }
+
+        .booking-card h3,
+        .contact-card h3 {
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .booking-card form,
+        .contact-card form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .field-group {
+            display: grid;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .field-group label {
+            color: #d1d1d1;
+            font-size: 0.95rem;
+        }
+
+        .field-group input,
+        .field-group select,
+        .field-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #f5f5f5;
+            font-size: 1rem;
+        }
+
+        .field-group input:focus,
+        .field-group select:focus,
+        .field-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.16);
+        }
+
+        .field-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: #d4af37;
+            color: #111;
+            border: none;
+            padding: 16px;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 35px rgba(212, 175, 55, 0.25);
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.14);
+            border-radius: 24px;
+            padding: 28px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .testimonial-card p {
+            color: #d1d1d1;
+            font-size: 1rem;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .testimonial-card .stars {
+            color: #d4af37;
+            letter-spacing: 4px;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.14);
+            border-radius: 20px;
+            padding: 20px;
+            color: #d1d1d1;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .success-message {
+            background: rgba(76, 175, 80, 0.18);
+            color: #b9f6ca;
+            border: 1px solid rgba(76, 175, 80, 0.35);
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        footer {
+            padding: 28px 0;
+            text-align: center;
+            color: #9da8b5;
+            border-top: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #c7c7c7;
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .footer-links a:hover {
+            color: #d4af37;
+        }
+
+        @media (max-width: 900px) {
+            .booking-wrapper,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .hero {
+                min-height: 420px;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            .hero-content h2 {
+                font-size: 2.6rem;
+            }
+
+            .service-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <h1>DORA HAIR SALON</h1>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#booking">Booking</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content container">
+            <p class="section-title">Luxury hair styling</p>
+            <h2>Dora Hair Salon — Premium beauty & grooming</h2>
+            <p class="section-text">Experience personalized styling, color treatments, and bridal haircraft in a warm, upscale salon environment.</p>
+            <a href="#booking" class="hero-btn">Book Your Appointment</a>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="container">
+            <p class="section-title">Our Services</p>
+            <h3 class="section-heading">Beauty services built for every style</h3>
+            <p class="section-text">From precision cuts and luxurious treatments to color transformations and styling for special occasions, our salon delivers a refined experience.</p>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <h3>Haircut & Styling</h3>
+                    <p>Precision cuts and styling tailored to your personal aesthetic.</p>
+                    <div class="service-meta">
+                        <span>$45</span>
+                        <span>30 min</span>
+                    </div>
+                    <button>Choose Service</button>
+                </article>
+                <article class="service-card">
+                    <h3>Color Treatment</h3>
+                    <p>Rich color and highlights with salon-grade products and expert application.</p>
+                    <div class="service-meta">
+                        <span>$85</span>
+                        <span>60 min</span>
+                    </div>
+                    <button>Choose Service</button>
+                </article>
+                <article class="service-card">
+                    <h3>Keratin & Smoothing</h3>
+                    <p>Smoothing treatment to reduce frizz and restore shine with long-lasting results.</p>
+                    <div class="service-meta">
+                        <span>$120</span>
+                        <span>90 min</span>
+                    </div>
+                    <button>Choose Service</button>
+                </article>
+                <article class="service-card">
+                    <h3>Bridal & Event Hair</h3>
+                    <p>Elegant styling and updos designed for weddings, photoshoots, and celebrations.</p>
+                    <div class="service-meta">
+                        <span>$150</span>
+                        <span>120 min</span>
+                    </div>
+                    <button>Choose Service</button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="gallery">
+        <div class="container">
+            <p class="section-title">Portfolio</p>
+            <h3 class="section-heading">Salon transformations</h3>
+            <p class="section-text">A curated gallery of modern cuts, vivid color work, and polished styling from our latest clients.</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80" alt="Sleek Styling">
+                    <div class="gallery-overlay">Sleek Styling</div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1000&q=80" alt="Soft Color">
+                    <div class="gallery-overlay">Soft Color</div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=1000&q=80" alt="Bridal Hair">
+                    <div class="gallery-overlay">Bridal Hair</div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1000&q=80" alt="Modern Cut">
+                    <div class="gallery-overlay">Modern Cut</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="booking">
+        <div class="container booking-wrapper">
+            <div class="booking-card">
+                <p class="section-title">Reservation</p>
+                <h3>Book your salon experience</h3>
+                <p class="section-text">Reserve your preferred date and time, then our team will confirm your appointment at the earliest.</p>
+                <form id="booking-form">
+                    <div class="field-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="phone">09161677718Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="service">Service</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="Haircut & Styling">Haircut & Styling</option>
+                            <option value="Color Treatment">Color Treatment</option>
+                            <option value="Keratin & Smoothing">Keratin & Smoothing</option>
+                            <option value="Bridal & Event Hair">Bridal & Event Hair</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="date">Preferred Date</label>
+                        <input type="date" id="date" name="date" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="time">Preferred Time</label>
+                        <input type="time" id="time" name="time" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Any special requests..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Request</button>
+                </form>
+                <div id="booking-success" class="success-message" style="display:none;">Your appointment request has been received. We will contact you soon!</div>
+            </div>
+            <div class="contact-card">
+                <p class="section-title">Salon Hours</p>
+                <h3>Visit DORA Hair Salon</h3>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <h4>Location</h4>
+                        <p>123 Luxe Avenue, Salon District</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Email</h4>
+                        <p>hello@dorahairsalon.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Hours</h4>
+                        <p>Mon–Fri: 9:00 AM – 7:00 PM</p>
+                        <p>Sat: 10:00 AM – 5:00 PM</p>
+                        <p>Sun: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <div class="container">
+            <p class="section-title">Testimonials</p>
+            <h3 class="section-heading">What clients love about us</h3>
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <p>"The team at Dora gave me the perfect color refresh. My hair feels incredible and the salon ambiance is just lovely."</p>
+                    <div class="author">
+                        <span>Hannah P.</span>
+                        <span class="stars">★★★★★</span>
+                    </div>
+                </article>
+                <article class="testimonial-card">
+                    <p>"I booked a bridal styling package and it was flawless. The stylist was calm, creative, and the finished look was stunning."</p>
+                    <div class="author">
+                        <span>Monica K.</span>
+                        <span class="stars">★★★★★</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#booking">Booking</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p>© 2026 DORA Hair Salon. Luxury styling & premium care.</p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('booking-form');
+        const success = document.getElementById('booking-success');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            success.style.display = 'block';
+            form.reset();
+            setTimeout(() => success.style.display = 'none', 5000);
+        });
+    </script>
+</body>
+</html>
